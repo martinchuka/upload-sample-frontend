@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+$colors : (
+    light: #f2f6f5,
+    primary: #63707e,
+    tertiary: #c8dad3,
+    secondary: #93b5b3
+);
+
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Open Sans', sans-serif; background: map_get($colors,light); }
+*:not(.material-icons){
+    font-family: 'Open Sans',sans-serif
+}
+.container {
+    max-width:1100px;
+    margin: 0 auto;
+    display:block;
+}
+
+
+.mat-icon-button{
+  border: none;
+}

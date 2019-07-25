@@ -1,0 +1,44 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+
+<div class="container">
+    <div class="mat-elevation-z4">
+        <mat-card>
+          <div class="progress">
+            <h4 *ngIf="!uploading">Upload Progress</h4>
+            <h4 *ngIf="uploading">{{files[progressIndex] && files[progressIndex].blob? 'Uploading '+files[progressIndex].blob.name : 'Uploading in progress'}}</h4>
+            <mat-progress-bar mode="determinant" [value]="progressBar"></mat-progress-bar>
+          </div>
+
+          <div class="upload-container" #el [class.isDragging]="isDragging">
+            <h4>Click to upload</h4>
+            <p>Drag & Drop your files here</p>
+            <input type="file" multiple/>
+
+          </div>
+
+          <div class="queue" *ngIf="files && files.length">
+            <div class="inner-queue" *ngFor="let item of files; let i = index">
+              <button class="mat-icon-button" mat-button (click)="removeFile(i)"><i class="material-icons">delete</i> </button>
+              <img [src]="item.url | blobSanitizer" *ngIf="item.type === 'image'"/>
+              <video [src]="item.url | blobSanitizer" *ngIf="item.type === 'video'"></video>
+            </div>
+
+          </div>
+          <div class="channel-type" *ngIf="files && files.length">
+            <mat-radio-group aria-label="Select an option" fxLayout="flex" fxLayoutAlign="space-between" [formControl]="channel">
+              <mat-radio-button value="1">Cloudinary</mat-radio-button>
+              <mat-radio-button value="2">File System</mat-radio-button>
+              <mat-radio-button value="3">S3</mat-radio-button>
+            </mat-radio-group>
+          </div>
+
+
+          <div class="upload-btn-container">
+              <button mat-button [disabled]="!files || !files.length || uploading" class="upload mat-elevation-z4" (click)="startUploading()">Upload</button>
+          </div>
+        </mat-card>
+
+      </div>
+
+</div>
